@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_356",
+  "step_index": 356,
+  "created_at_utc": "2026-10-27T11:35:19+00:00",
+  "created_timestamp": 1793100919.0,
+  "expires_at_utc": "2026-12-01T11:35:19+00:00",
+  "expires_timestamp": 1796124919.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nwhich file install it has for new computers or any windows, any os or mac. make it run in all and make sure it connects with dashboard to see the result.\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-10-27T17:05:19+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

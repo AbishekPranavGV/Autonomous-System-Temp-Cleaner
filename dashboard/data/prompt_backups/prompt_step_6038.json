@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_6038",
+  "step_index": 6038,
+  "created_at_utc": "2026-11-11T09:31:08.385454+00:00",
+  "created_timestamp": 1794389468.385454,
+  "expires_at_utc": "2026-12-16T09:31:08.385454+00:00",
+  "expires_timestamp": 1797413468.385454,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nadd AI agent as chatbot like the \"leadauto project\" works. and make it live and show the dashboard with UI design as animation and graphs as professional and with everything as working\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T14:47:06+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

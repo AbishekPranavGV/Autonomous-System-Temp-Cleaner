@@ -1,0 +1,14 @@
+{
+  "id": "prompt_20261111_034403_943",
+  "created_at_utc": "2026-11-11T03:44:03.943093+00:00",
+  "created_timestamp": 1794368643.943093,
+  "expires_at_utc": "2026-12-16T03:44:03.943093+00:00",
+  "expires_timestamp": 1797392643.943093,
+  "retention_days": 35,
+  "prompt": "the files are not not clean from temp , %temp%, cleanmgr and etc are not working.make sure it works. check the above previous prompt works",
+  "metadata": {
+    "step_index": 4725,
+    "source": "USER_EXPLICIT"
+  },
+  "status": "BACKED_UP"
+}

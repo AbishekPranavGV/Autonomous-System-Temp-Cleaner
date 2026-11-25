@@ -1,0 +1,150 @@
+# Part 2 of generator script
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+BODY_HEADER_NAV = '''
+  <!-- Main Application Window Wrapper -->
+  <div class="w-full max-w-[99%] 2xl:max-w-[1680px] mx-auto app-window rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4 transition-all duration-300">
+
+    <!-- Top Header Bar with Brand, Live Clock, Language Toggle, and Actions -->
+    <header class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-3 pb-3 border-b border-sky-100 dark:border-sky-950/60">
+      
+      <!-- Brand Area: NUNES AI PC Command Center v10.0 -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-600 via-blue-600 to-indigo-700 flex items-center justify-center shadow-md shadow-sky-500/25 text-white font-black text-lg select-none flex-shrink-0 animate-pulse">
+          ⚡
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white" id="mainAppTitle">
+              NUNES AI PC Command Center
+            </h1>
+            <span class="text-[10px] font-mono font-bold text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-950/70 border border-sky-300 dark:border-sky-800 px-2 py-0.5 rounded-full" id="versionBadge">
+              v10.0 Enterprise
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium" id="subAppTitle">
+            Autonomous Optimization, Deterministic Win32 Diagnostics & Fleet Sentry • NUNES Instruments
+          </p>
+        </div>
+
+        <!-- Hidden ID Anchors to preserve existing backend/DOM references -->
+        <span id="adminBadge" class="hidden"></span>
+        <span id="scanStatusBadge" class="hidden"><span id="scanStatusText"></span></span>
+        <span id="nextLoopClock" class="hidden"></span>
+      </div>
+
+      <!-- Header Operational Actions (Clock, Language, Theme, Scan, Clean, Rescue, Settings) -->
+      <div class="flex flex-wrap items-center gap-2 w-full xl:w-auto justify-end">
+        
+        <!-- Live Real-Time Heartbeat Clock -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80 text-xs font-mono font-bold shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="liveStatusClock">LIVE • 17:20 UTC</span>
+        </div>
+
+        <!-- 🌐 Language Switcher (English / தமிழ்) -->
+        <button onclick="toggleLanguage()" id="btnLangToggle" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-white dark:bg-slate-800 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-sky-500 transition-all flex items-center gap-1.5 shadow-sm active:scale-95" title="Switch Language (English / தமிழ்)">
+          <span class="text-sm">🌐</span>
+          <span id="langToggleLabel">தமிழ்</span>
+        </button>
+
+        <!-- 🌙 Theme Toggle Button -->
+        <button onclick="toggleTheme()" id="btnThemeToggle" class="w-8 h-8 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-200 hover:border-sky-500 flex items-center justify-center text-xs shadow-sm active:scale-95 transition-all" title="Toggle Light/Dark Theme">
+          <span id="themeToggleIcon">🌙</span>
+        </button>
+
+        <!-- 🔍 Scan Selected Button -->
+        <button onclick="triggerScanSelected()" id="btnScanSelected" class="px-3.5 py-1.5 rounded-xl text-xs font-bold subtle-pill border-sky-300 hover:border-sky-400 dark:border-sky-600/50 text-sky-700 dark:text-sky-300 transition-all flex items-center gap-1.5 active:scale-95 shadow-sm" title="Scan selected categories">
+          <span>🔍</span>
+          <span data-i18n="btn_scan">Scan Selected</span>
+        </button>
+
+        <!-- ⚡ CLEAN SELECTED (Primary Action) -->
+        <button onclick="triggerCleanSelected()" id="btnCleanSelected" class="px-4.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider primary-btn transition-all flex items-center gap-2 active:scale-95 shadow-md shadow-sky-600/30" title="Safely clean junk files">
+          <span>⚡</span>
+          <span data-i18n="btn_clean">CLEAN SELECTED</span>
+        </button>
+
+        <!-- 🚨 Anti-Hang Rescue Button -->
+        <button onclick="triggerAntiHangRescue()" id="btnAntiHang" class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold uppercase bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-rose-700/50 transition-all flex items-center gap-1.5 active:scale-95 shadow-sm" title="Emergency RAM Trim & Frozen Process Resolver">
+          <span>🚨</span>
+          <span data-i18n="btn_rescue">RESCUE PC</span>
+        </button>
+
+        <!-- ⚙️ Top Settings Flyout -->
+        <div class="relative" id="settingsContainer">
+          <button onclick="toggleSettingsMenu(event)" id="btnTopSettings" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-slate-100 dark:text-slate-900 shadow-md transition-all flex items-center gap-1.5 active:scale-95" title="Settings & Utilities">
+            <span class="text-sm">⚙️</span>
+            <span data-i18n="nav_settings">Settings</span>
+            <span class="text-[9px] opacity-70 transition-transform duration-200" id="settingsArrow">▼</span>
+          </button>
+
+          <!-- Dropdown Flyout Panel -->
+          <div id="settingsDropdownMenu" class="hidden absolute right-0 mt-2 w-72 sm:w-80 rounded-2xl bg-white/95 dark:bg-[#111d38]/95 backdrop-blur-xl border border-sky-200 dark:border-white/10 shadow-2xl z-50 p-3 space-y-2 transition-all duration-200">
+            <div class="flex items-center justify-between pb-2 border-b border-sky-100 dark:border-white/5 px-1">
+              <div class="flex items-center gap-1.5">
+                <span class="text-sm">⚙️</span>
+                <span class="text-xs font-extrabold text-slate-900 dark:text-white uppercase tracking-wider">Quick Utilities</span>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 font-bold">v10.0</span>
+            </div>
+
+            <div class="space-y-1 text-xs">
+              <button onclick="switchTab('settings'); toggleSettingsMenu();" class="w-full px-3 py-2 rounded-xl flex items-center justify-between hover:bg-sky-50 dark:hover:bg-white/5 transition-all font-semibold text-slate-700 dark:text-slate-200">
+                <div class="flex items-center gap-2"><span>⚙️</span><span>Full System Settings</span></div>
+                <span class="text-[10px] font-mono text-sky-600">Open</span>
+              </button>
+              <button onclick="toggleTheme()" class="w-full px-3 py-2 rounded-xl flex items-center justify-between hover:bg-slate-100 dark:hover:bg-white/5 transition-all font-semibold text-slate-700 dark:text-slate-200">
+                <div class="flex items-center gap-2"><span>🌓</span><span>Toggle Theme</span></div>
+                <span class="text-[10px] text-slate-400 font-mono">Appearance</span>
+              </button>
+              <a href="NUNES_FLEET_CLIENT_V7.zip" onclick="downloadFreshClientZip(event); toggleSettingsMenu();" class="w-full px-3 py-2 rounded-xl flex items-center justify-between bg-sky-600 hover:bg-sky-700 text-white font-bold transition-all shadow-sm">
+                <div class="flex items-center gap-2"><span>📥</span><span>Download Client (.zip)</span></div>
+                <span class="text-[10px] font-mono bg-white/20 px-1.5 py-0.5 rounded">ZIP</span>
+              </a>
+              <button onclick="checkForUpdates(); toggleSettingsMenu();" class="w-full px-3 py-2 rounded-xl flex items-center justify-between hover:bg-slate-100 dark:hover:bg-white/5 transition-all font-semibold text-slate-700 dark:text-slate-200">
+                <div class="flex items-center gap-2"><span>🔄</span><span>Check OTA Updates</span></div>
+                <span class="text-[10px] text-emerald-500 font-bold">OTA</span>
+              </button>
+              <button onclick="openAIChatModal(); toggleSettingsMenu();" class="w-full px-3 py-2 rounded-xl flex items-center justify-between hover:bg-slate-100 dark:hover:bg-white/5 transition-all font-semibold text-slate-700 dark:text-slate-200">
+                <div class="flex items-center gap-2"><span>🤖</span><span>AI Technician Copilot</span></div>
+                <span class="text-[10px] text-violet-500 font-bold">AI</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- 🌟 8 MAIN SECTIONS NAVIGATION TAB BAR -->
+    <nav class="flex items-center gap-1 p-1 bg-sky-50/80 dark:bg-slate-900/80 rounded-2xl border border-sky-100 dark:border-sky-950/60 overflow-x-auto scrollbar-none" role="tablist">
+      <button onclick="switchTab('overview')" id="tabBtn_overview" class="nav-tab-btn active" role="tab">
+        <span>📊</span><span data-i18n="nav_overview">1. Overview</span>
+      </button>
+      <button onclick="switchTab('smart_scan')" id="tabBtn_smart_scan" class="nav-tab-btn" role="tab">
+        <span>🔍</span><span data-i18n="nav_smart_scan">2. Smart Scan</span>
+      </button>
+      <button onclick="switchTab('diagnostics')" id="tabBtn_diagnostics" class="nav-tab-btn" role="tab">
+        <span>🩺</span><span data-i18n="nav_diagnostics">3. AI Diagnostics</span>
+      </button>
+      <button onclick="switchTab('cleanup')" id="tabBtn_cleanup" class="nav-tab-btn" role="tab">
+        <span>⚡</span><span data-i18n="nav_cleanup">4. Safe Cleanup</span>
+      </button>
+      <button onclick="switchTab('fleet')" id="tabBtn_fleet" class="nav-tab-btn" role="tab">
+        <span>🖥️</span><span data-i18n="nav_fleet">5. Fleet Management</span>
+      </button>
+      <button onclick="switchTab('health')" id="tabBtn_health" class="nav-tab-btn" role="tab">
+        <span>❤️</span><span data-i18n="nav_health">6. System Health</span>
+      </button>
+      <button onclick="switchTab('reports')" id="tabBtn_reports" class="nav-tab-btn" role="tab">
+        <span>📋</span><span data-i18n="nav_reports">7. Reports</span>
+      </button>
+      <button onclick="switchTab('settings')" id="tabBtn_settings" class="nav-tab-btn" role="tab">
+        <span>⚙️</span><span data-i18n="nav_settings">8. Settings</span>
+      </button>
+    </nav>
+'''
+print("Loaded Part 2")

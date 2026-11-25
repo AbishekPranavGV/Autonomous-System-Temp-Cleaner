@@ -1,0 +1,18 @@
+{
+  "id": "prompt_step_2816",
+  "step_index": 2816,
+  "created_at_utc": "2026-11-05T03:46:39+00:00",
+  "created_timestamp": 1793850399.0,
+  "expires_at_utc": "2026-12-10T03:46:39+00:00",
+  "expires_timestamp": 1796874399.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nthis is not live and accurate as of now make sure this works perfectly and build it untill it working and run an run test and give live analysis as it works \n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-05T09:16:39+05:30.\n\nThe user has uploaded 2 image(s):\n- C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793850273031_4a081b61.png\n- C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793850283634_a6f16cec.png\nYou can embed these images in an artifact if you need the USER to review them.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": [
+      "C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793850273031_4a081b61.png",
+      "C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793850283634_a6f16cec.png"
+    ]
+  },
+  "status": "BACKED_UP"
+}

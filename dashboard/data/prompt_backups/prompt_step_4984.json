@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_4984",
+  "step_index": 4984,
+  "created_at_utc": "2026-11-11T03:45:44+00:00",
+  "created_timestamp": 1794368744.0,
+  "expires_at_utc": "2026-12-16T03:45:44+00:00",
+  "expires_timestamp": 1797392744.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nmake it happen when the other user or if it works in other computers and show the details in the other computers and in dashboard\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T09:15:44+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

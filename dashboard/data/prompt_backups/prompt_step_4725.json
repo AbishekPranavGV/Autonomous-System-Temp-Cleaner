@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_4725",
+  "step_index": 4725,
+  "created_at_utc": "2026-11-11T03:37:00+00:00",
+  "created_timestamp": 1794368220.0,
+  "expires_at_utc": "2026-12-16T03:37:00+00:00",
+  "expires_timestamp": 1797392220.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nthe files are not not clean from temp , %temp%, cleanmgr and etc are not working.make sure it works. check the above previous prompt works\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T09:07:00+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

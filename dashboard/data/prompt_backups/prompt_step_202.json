@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_202",
+  "step_index": 202,
+  "created_at_utc": "2026-10-27T09:36:10+00:00",
+  "created_timestamp": 1793093770.0,
+  "expires_at_utc": "2026-12-01T09:36:10+00:00",
+  "expires_timestamp": 1796117770.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\ni need to reconnect or connect again and clean the other \n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-10-27T15:06:10+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

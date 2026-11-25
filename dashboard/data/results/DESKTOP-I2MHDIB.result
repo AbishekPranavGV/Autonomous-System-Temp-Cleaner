@@ -1,0 +1,13 @@
+{
+  "DeletedFiles": 260,
+  "ReclaimedMB": 18.05,
+  "Timestamp": "2026-11-12T08:09:41.1043261Z",
+  "Status": "SUCCESS",
+  "Computer": "DESKTOP-I2MHDIB",
+  "deleted": 260,
+  "Deleted": 260,
+  "recovered_mb": 18.05,
+  "EstimatedRecoveredMB": 18.05,
+  "timestamp": "2026-11-12T08:10:04.415984+00:00",
+  "TimestampUtc": "2026-11-12T08:10:04.415984+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "prompt_step_3950",
+  "step_index": 3950,
+  "created_at_utc": "2026-11-05T08:55:50+00:00",
+  "created_timestamp": 1793868950.0,
+  "expires_at_utc": "2026-12-10T08:55:50+00:00",
+  "expires_timestamp": 1796892950.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nmake sure the previous prompt is also backeduped and delete it every 35 days onces.add this as the every updates are updated in the UI zip file as the same works from the any computer or any windows and make sure it connectes and works like this in every compter or pc and show it as live and accurate.\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-05T14:25:50+05:30.\n\nThe user has uploaded 1 image(s):\n- C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793867806456_93720989.png\nYou can embed this image in an artifact if you need the USER to review it.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": [
+      "C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1793867806456_93720989.png"
+    ]
+  },
+  "status": "BACKED_UP"
+}

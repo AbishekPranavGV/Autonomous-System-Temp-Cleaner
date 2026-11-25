@@ -1,0 +1,14 @@
+{
+  "id": "prompt_20261105_100123_497",
+  "created_at_utc": "2026-11-05T10:01:23.497623+00:00",
+  "created_timestamp": 1793872883.497623,
+  "expires_at_utc": "2026-12-10T10:01:23.497623+00:00",
+  "expires_timestamp": 1796896883.497623,
+  "retention_days": 35,
+  "prompt": "make sure the previous prompt is also backeduped and delete it every 35 days onces.add this as the every updates are updated in the UI zip file as the same works from the any computer or any windows and make sure it connectes and works like this in every compter or pc and show it as live and accurate.",
+  "metadata": {
+    "user": "Sebastian Nunes",
+    "attached_media": "media_1793867806456_93720989.png"
+  },
+  "status": "BACKED_UP"
+}

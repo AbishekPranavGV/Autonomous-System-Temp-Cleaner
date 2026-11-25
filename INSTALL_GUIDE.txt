@@ -1,0 +1,61 @@
+==============================================================================
+   NUNES FLEET TEMP CLEANER - INSTALLATION GUIDE (ALL OPERATING SYSTEMS)
+==============================================================================
+
+Folder Location:
+\\192.168.29.88\Common\Completed\Abishek\final\NUNES_TEMP_final\NUNES_TEMP_CLEANER_V7_4_0_HEARTBEAT_RECOVERY
+
+------------------------------------------------------------------------------
+1. FOR WINDOWS COMPUTERS (Windows 10, Windows 11, Windows Server):
+------------------------------------------------------------------------------
+Option A (Recommended):
+  1. Open this folder in Windows File Explorer.
+  2. Right-click "CONNECT_THIS_PC.bat" (or "INSTALL_NEW_PC.bat").
+  3. Select "Run as Administrator".
+  4. The installer configures a silent background Scheduled Task.
+  5. The PC will appear ONLINE on the dashboard within 60 seconds.
+
+Option B (Python Universal Client):
+  python nunes_universal_cleaner.py --install
+
+------------------------------------------------------------------------------
+2. FOR APPLE MAC COMPUTERS (macOS Monterey, Ventura, Sonoma, Sequoia):
+------------------------------------------------------------------------------
+  1. Open Terminal on the Mac.
+  2. Navigate to this shared folder (or copy the files locally):
+       cd /Volumes/Common/Completed/Abishek/final/NUNES_TEMP_final/NUNES_TEMP_CLEANER_V7_4_0_HEARTBEAT_RECOVERY
+  3. Run the installer script:
+       bash install_mac.sh
+  4. This registers a macOS LaunchAgent (com.nunes.cleaner.plist).
+  5. The Mac runs silently in the background on startup, cleans every 4 hours,
+     and sends a live 1-minute heartbeat to the central dashboard.
+
+------------------------------------------------------------------------------
+3. FOR LINUX COMPUTERS (Ubuntu, Debian, Fedora, CentOS, Arch):
+------------------------------------------------------------------------------
+  1. Open Terminal.
+  2. Run:
+       bash install_linux.sh
+  3. This configures a systemd user daemon (nunes-cleaner.service).
+
+------------------------------------------------------------------------------
+4. HOW TO MONITOR & VIEW RESULTS:
+------------------------------------------------------------------------------
+  Local Dashboard : http://192.168.29.88:8090  (or http://localhost:8090)
+  Cloud Dashboard : https://nunes-temp-cleaner-dashboard.vercel.app
+
+  Every connected computer displays:
+  - Computer Name & OS (Windows / macOS / Linux)
+  - Online / Offline Status
+  - Tailscale & Local LAN IP addresses
+  - Time of last cleanup & MB recovered
+  - Cleanmgr integration indicator
+  - One-click "Clean Now" button
+
+------------------------------------------------------------------------------
+5. WINDOWS CLEANMGR (DISK CLEANUP) INTEGRATION:
+------------------------------------------------------------------------------
+  - Automated execution of cleanmgr.exe /autoclean runs during each 4-hour cycle.
+  - Deep system cache cleanup: memory dumps, system temp setup files, error logs.
+  - Non-destructive: personal folders (Downloads, Documents) are fully protected.
+==============================================================================

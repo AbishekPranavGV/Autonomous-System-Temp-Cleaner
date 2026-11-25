@@ -1,0 +1,26 @@
+[
+  {
+    "id": "20261104100015",
+    "name": "Snapshot 20261104100015",
+    "date": "04 Nov 2026, 10:00",
+    "files_count": 2,
+    "size": "4.7 KB",
+    "type": "Manual Backup Before Clean"
+  },
+  {
+    "id": "20261104060000",
+    "name": "Snapshot 20261104060000",
+    "date": "04 Nov 2026, 06:00",
+    "files_count": 48,
+    "size": "17.1 MB",
+    "type": "4-Hour Autonomous Loop Sweep"
+  },
+  {
+    "id": "20261103200210",
+    "name": "Snapshot 20261103200210",
+    "date": "03 Nov 2026, 20:02",
+    "files_count": 12,
+    "size": "2.4 MB",
+    "type": "Express Sweep Backup"
+  }
+]

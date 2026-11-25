@@ -1,0 +1,12 @@
+.vercel
+__pycache__/
+*.pyc
+.env*.local
+
+.vercel
+.env*
+
+*.zip
+.env.local
+__pycache__/
+*.pyc

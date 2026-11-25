@@ -1,0 +1,15 @@
+{
+  "Version": "8.5.0",
+  "RequestId": "req_1794393328_LOCAL",
+  "Command": "CLEAN",
+  "PC": "LOCAL",
+  "Options": {
+    "preset": "balanced",
+    "cleanmgr": true,
+    "recycle_bin": false,
+    "dry_run": false
+  },
+  "CreatedUtc": "2026-11-11T10:35:28.980683+00:00",
+  "ExpiresUtc": "2026-11-11T14:35:28.980663+00:00",
+  "Source": "NUNES_DASHBOARD_1CLICK"
+}

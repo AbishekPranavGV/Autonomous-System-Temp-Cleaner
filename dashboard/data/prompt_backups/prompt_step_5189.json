@@ -1,0 +1,17 @@
+{
+  "id": "prompt_step_5189",
+  "step_index": 5189,
+  "created_at_utc": "2026-11-11T04:56:28+00:00",
+  "created_timestamp": 1794372988.0,
+  "expires_at_utc": "2026-12-16T04:56:28+00:00",
+  "expires_timestamp": 1797396988.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\n make it invisible and make an copy file from the https://github.com/AbishekPranavGV/Autonomous-System-Temp-Cleaner and make it live from the instriasia@gmail.com and make it live in using vercel and with the local file\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T10:26:28+05:30.\n\nThe user has uploaded 1 image(s):\n- C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1794372827860_36403fa4.png\nYou can embed this image in an artifact if you need the USER to review it.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": [
+      "C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1794372827860_36403fa4.png"
+    ]
+  },
+  "status": "BACKED_UP"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_846",
+  "step_index": 846,
+  "created_at_utc": "2026-10-31T09:26:02+00:00",
+  "created_timestamp": 1793438762.0,
+  "expires_at_utc": "2026-12-05T09:26:02+00:00",
+  "expires_timestamp": 1796462762.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nmake sure it works as automatically clears cleanmgr, temp, %temp%.(does cleanmgr clean all wanted data, if it does then dont or make it as option and add it as i can clean from dashbord in one click(without any request , once its connected , then clean it directly(do not request any permission and clean it immediatley and add auto clean 4 hour in between)\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-10-31T14:56:02+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

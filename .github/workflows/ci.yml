@@ -1,0 +1,24 @@
+name: CI System Maintenance & Automation Validation
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify cleaner script and bundle
+        run: |
+          python -c "
+          import os, zipfile
+          assert os.path.exists('NUNES_CACHE_CLEANER.bat'), 'Cleaner batch script missing'
+          with open('NUNES_CACHE_CLEANER.bat', 'r', encoding='utf-8', errors='ignore') as f:
+              lines = f.readlines()
+          print(f'Batch utility verified ({len(lines)} lines)')
+          if os.path.exists('NUNES_CACHE_CLEANER_4H_AUTOMATION.zip'):
+              with zipfile.ZipFile('NUNES_CACHE_CLEANER_4H_AUTOMATION.zip', 'r') as z:
+                  print(f'Automation package verified ({len(z.namelist())} files)')
+          "

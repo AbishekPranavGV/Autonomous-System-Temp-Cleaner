@@ -1,0 +1,20 @@
+{
+  "id": "prompt_step_5628",
+  "step_index": 5628,
+  "created_at_utc": "2026-11-11T07:31:04+00:00",
+  "created_timestamp": 1794382264.0,
+  "expires_at_utc": "2026-12-16T07:31:04+00:00",
+  "expires_timestamp": 1797406264.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nadd update of 10000x better version than now of advanced and make it better version with accurately and the above updates as to be automatically updated everytime as it has to show from the other computer (if its is not updated check it and make it shown  everythime as the update or to update the version in the other computer as notification(as animation).and give the better option with better flow as ytour suggestion and give with animation everywhere.  check this prompt if its added as updated if not make it \n->remove UI text contents \"Website\"  from the above image.\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T13:01:04+05:30.\n\nThe user has uploaded 1 image(s):\n- C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1794380734386_033b8df3.png\nYou can embed this image in an artifact if you need the USER to review it.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": [
+      {
+        "mime_type": "image/png",
+        "uri": "C:/Users/Nunes/.gemini/antigravity/brain/50d997d7-7a4d-4750-9c70-6aed19af6f2b/.user_uploaded/media_1794380734386_033b8df3.png"
+      }
+    ]
+  },
+  "status": "BACKED_UP"
+}

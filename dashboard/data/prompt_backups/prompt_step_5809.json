@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_5809",
+  "step_index": 5809,
+  "created_at_utc": "2026-11-11T08:37:08.485797+00:00",
+  "created_timestamp": 1794386228.485797,
+  "expires_at_utc": "2026-12-16T08:37:08.485797+00:00",
+  "expires_timestamp": 1797410228.485797,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nmake sure the buttons from the system and every buttons are live and shows results accurately and perfectlyand make it live\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-11T13:50:16+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

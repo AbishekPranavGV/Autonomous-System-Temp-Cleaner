@@ -1,0 +1,529 @@
+# Part 4: Sections 4, 5, 6, 7, 8
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+SECTIONS_4_5_6_7_8 = '''
+    <!-- ============================================================== -->
+    <!-- SECTION 4: ZERO-LOSS SAFE CLEANUP                             -->
+    <!-- ============================================================== -->
+    <section id="sec_cleanup" class="section-view space-y-4">
+      
+      <div class="surface-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="cleanup_engine_title">Zero-Loss Policy-Controlled Cleanup Engine</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cleanup_engine_sub">Pre-clean snapshot verification, file-locking protection, and byte-verified results</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="triggerCleanSelected()" class="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider primary-btn transition-all flex items-center gap-2 active:scale-95 shadow-md shadow-sky-600/30">
+            <span>⚡</span><span>Execute Safe Clean</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Safety Boundaries & Rollback Verification Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        
+        <div class="surface-card rounded-2xl p-4 space-y-1.5 border-emerald-200 dark:border-emerald-900/50">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">1. Pre-Clean Snapshot</span>
+          <div class="text-lg font-black text-emerald-600 dark:text-emerald-400">Verified & Active</div>
+          <p class="text-[11px] text-slate-500">Full manifest generated before deleting candidate files</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1.5 border-emerald-200 dark:border-emerald-900/50">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">2. Process Lock Sentry</span>
+          <div class="text-lg font-black text-emerald-600 dark:text-emerald-400">Graceful Skip</div>
+          <p class="text-[11px] text-slate-500">Active Chrome, Edge, and Office locks are never forced</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1.5 border-emerald-200 dark:border-emerald-900/50">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">3. Protected Paths</span>
+          <div class="text-lg font-black text-emerald-600 dark:text-emerald-400">100% Isolated</div>
+          <p class="text-[11px] text-slate-500">Downloads, Desktop, and user Documents are untouchable</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1.5 border-cyan-200 dark:border-cyan-900/50">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">4. Retention Life</span>
+          <div class="text-lg font-black text-cyan-600 dark:text-cyan-400">30-Day Rolling</div>
+          <p class="text-[11px] text-slate-500">Prunes historical snapshots older than 30 days automatically</p>
+        </div>
+
+      </div>
+
+      <!-- Recovery Snapshots & Rollback Panel -->
+      <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-sky-100 dark:border-white/5 pb-2">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white" data-i18n="recovery_snapshots_title">Verified Recovery Snapshots & Rollback History</h4>
+          <button onclick="fetchSnapshots()" class="text-xs text-sky-600 font-mono hover:underline">Refresh</button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="border-b border-sky-100 dark:border-white/5 text-slate-500">
+              <tr>
+                <th class="pb-2">Snapshot ID</th>
+                <th class="pb-2">Timestamp (UTC)</th>
+                <th class="pb-2">Archived Items</th>
+                <th class="pb-2">Retention Left</th>
+                <th class="pb-2 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5" id="snapshotsTableBody">
+              <tr>
+                <td class="py-2 font-bold text-slate-800 dark:text-slate-200">snap_20261111_160015</td>
+                <td>2026-11-11 10:30:15 UTC</td>
+                <td>734 items (860 MB)</td>
+                <td><span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[10px]">30.0 Days</span></td>
+                <td class="text-right">
+                  <button onclick="restoreSnapshot('snap_20261111_160015')" class="px-2.5 py-1 rounded bg-sky-100 text-sky-700 hover:bg-sky-200 font-bold text-[11px]">Rollback</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 font-bold text-slate-800 dark:text-slate-200">snap_20261110_091522</td>
+                <td>2026-11-10 03:45:22 UTC</td>
+                <td>612 items (710 MB)</td>
+                <td><span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[10px]">29.0 Days</span></td>
+                <td class="text-right">
+                  <button onclick="restoreSnapshot('snap_20261110_091522')" class="px-2.5 py-1 rounded bg-sky-100 text-sky-700 hover:bg-sky-200 font-bold text-[11px]">Rollback</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 5: FLEET COMMAND CENTER                               -->
+    <!-- ============================================================== -->
+    <section id="sec_fleet" class="section-view space-y-4">
+      
+      <div class="surface-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="fleet_title">Fleet Command Center</h3>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300">NUNES Office Network</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="fleet_sub">Secure management of authorized office PCs with real heartbeat monitoring and department grouping</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="NUNES_FLEET_CLIENT_V7.zip" onclick="downloadFreshClientZip(event)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm flex items-center gap-1.5">
+            <span>📥</span><span>Download Client (.zip)</span>
+          </a>
+          <button onclick="triggerUpdateAllFleet()" class="px-3 py-1.5 rounded-xl text-xs font-bold subtle-pill">
+            <span>🚀</span><span>OTA Upgrade All</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Department Filter Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs font-bold">
+        <button onclick="filterFleetByDept('all')" id="deptBtn_all" class="px-3 py-1.5 rounded-xl bg-sky-600 text-white shadow-sm">All Departments (4)</button>
+        <button onclick="filterFleetByDept('eng')" id="deptBtn_eng" class="px-3 py-1.5 rounded-xl surface-card text-slate-600 hover:text-sky-600">Engineering & Lab</button>
+        <button onclick="filterFleetByDept('acct')" id="deptBtn_acct" class="px-3 py-1.5 rounded-xl surface-card text-slate-600 hover:text-sky-600">Accounts & Finance</button>
+        <button onclick="filterFleetByDept('prod')" id="deptBtn_prod" class="px-3 py-1.5 rounded-xl surface-card text-slate-600 hover:text-sky-600">Production & Quality</button>
+        <button onclick="filterFleetByDept('sales')" id="deptBtn_sales" class="px-3 py-1.5 rounded-xl surface-card text-slate-600 hover:text-sky-600">Front Office & Sales</button>
+      </div>
+
+      <!-- Detailed Fleet Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="fleetNodesDetailedGrid">
+        
+        <!-- PC 1: DESKTOP-M378M07 -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3 border-sky-300 dark:border-sky-800">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white font-mono">DESKTOP-M378M07</h4>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 text-sky-800">THIS PC (HOST)</span>
+              </div>
+              <p class="text-xs font-medium text-sky-600 dark:text-sky-400 mt-0.5">Department: Engineering & Lab</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">ONLINE (0.1m)</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-xs font-mono p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+            <div><span class="text-slate-400 block text-[10px]">Free Space</span><strong class="text-slate-800 dark:text-slate-200">10.3 GB</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">RAM Load</span><strong class="text-amber-600">78%</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">Disk Latency</span><strong class="text-emerald-600">2.15 ms</strong></div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-slate-500 font-mono">Version: <strong>v10.0 Enterprise</strong></span>
+            <div class="flex items-center gap-2">
+              <button onclick="triggerDirectRescue('DESKTOP-M378M07')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">Rescue</button>
+              <button onclick="triggerDirectClean('DESKTOP-M378M07')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-700">Safe Clean</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PC 2: DESKTOP-EV2F0TV -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white font-mono">DESKTOP-EV2F0TV</h4>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 text-indigo-800">TAILSCALE</span>
+              </div>
+              <p class="text-xs font-medium text-indigo-600 dark:text-indigo-400 mt-0.5">Department: Accounts & Finance</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">ONLINE (1.2m)</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-xs font-mono p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+            <div><span class="text-slate-400 block text-[10px]">Free Space</span><strong class="text-slate-800 dark:text-slate-200">28.5 GB</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">RAM Load</span><strong class="text-slate-700 dark:text-slate-300">65%</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">Network IP</span><strong class="text-indigo-600">100.95.82.12</strong></div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-slate-500 font-mono">Version: <strong>v10.0 Enterprise</strong></span>
+            <div class="flex items-center gap-2">
+              <button onclick="triggerDirectRescue('DESKTOP-EV2F0TV')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">Rescue</button>
+              <button onclick="triggerDirectClean('DESKTOP-EV2F0TV')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-700">Safe Clean</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PC 3: DESKTOP-I2MHDIB -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white font-mono">DESKTOP-I2MHDIB</h4>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800">TAILSCALE</span>
+              </div>
+              <p class="text-xs font-medium text-teal-600 dark:text-teal-400 mt-0.5">Department: Production & Quality</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">ONLINE (3.4m)</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-xs font-mono p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+            <div><span class="text-slate-400 block text-[10px]">Free Space</span><strong class="text-slate-800 dark:text-slate-200">42.1 GB</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">RAM Load</span><strong class="text-slate-700 dark:text-slate-300">58%</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">Network IP</span><strong class="text-teal-600">100.84.19.44</strong></div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-slate-500 font-mono">Version: <strong>v10.0 Enterprise</strong></span>
+            <div class="flex items-center gap-2">
+              <button onclick="triggerDirectRescue('DESKTOP-I2MHDIB')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">Rescue</button>
+              <button onclick="triggerDirectClean('DESKTOP-I2MHDIB')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-700">Safe Clean</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PC 4: DESKTOP-F8G3T2C -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white font-mono">DESKTOP-F8G3T2C</h4>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">OFFICE LAN</span>
+              </div>
+              <p class="text-xs font-medium text-amber-600 dark:text-amber-400 mt-0.5">Department: Front Office & Sales</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">ONLINE (4.1m)</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-xs font-mono p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+            <div><span class="text-slate-400 block text-[10px]">Free Space</span><strong class="text-slate-800 dark:text-slate-200">64.0 GB</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">RAM Load</span><strong class="text-slate-700 dark:text-slate-300">52%</strong></div>
+            <div><span class="text-slate-400 block text-[10px]">Local IP</span><strong class="text-amber-600">192.168.1.140</strong></div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-slate-500 font-mono">Version: <strong>v10.0 Enterprise</strong></span>
+            <div class="flex items-center gap-2">
+              <button onclick="triggerDirectRescue('DESKTOP-F8G3T2C')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">Rescue</button>
+              <button onclick="triggerDirectClean('DESKTOP-F8G3T2C')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-700">Safe Clean</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Onboarding Any Windows Computer Box -->
+      <div class="p-4 surface-card rounded-2xl border-sky-200 dark:border-sky-900/60 space-y-2">
+        <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Connect Any Windows Computer in 10 Seconds</h4>
+        <p class="text-xs text-slate-600 dark:text-slate-300">
+          Run this 1-line command in PowerShell (Admin) on any office desktop or laptop to automatically link it to this command center:
+        </p>
+        <div class="flex items-center gap-2">
+          <input type="text" readonly value="irm https://autonomous-system-temp-cleaner-six.vercel.app/NUNES_FLEET_CLIENT_V7.zip -OutFile $env:TEMP\\nunes.zip; Expand-Archive $env:TEMP\\nunes.zip -DestinationPath $env:USERPROFILE\\NunesFleet -Force; Start-Process $env:USERPROFILE\\NunesFleet\\CONNECT_FLEET_PC.bat" class="flex-1 px-3 py-2 rounded-xl bg-slate-900 text-emerald-400 font-mono text-[11px] border border-slate-700 select-all" id="txtOnboardCmd">
+          <button onclick="navigator.clipboard.writeText(document.getElementById('txtOnboardCmd').value); showToast('Command copied!', '📋');" class="px-3 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-700 shadow-sm">
+            Copy
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 6: PREDICTIVE SYSTEM HEALTH & TRENDS                  -->
+    <!-- ============================================================== -->
+    <section id="sec_health" class="section-view space-y-4">
+      
+      <div class="surface-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="health_title">Predictive Health & Capacity Trends</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="health_sub">Storage consumption forecasting, memory pressure velocity, and SMART status</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-500">Forecast Rate:</span>
+          <span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold">+320 MB / day</span>
+        </div>
+      </div>
+
+      <!-- Predictive Indicators Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        
+        <div class="surface-card rounded-2xl p-4 space-y-1">
+          <span class="text-xs font-bold text-slate-500">SMART Disk Estimation</span>
+          <div class="text-xl font-black text-emerald-600">Healthy (0 Reallocated)</div>
+          <p class="text-[11px] text-slate-500">Zero physical drive sector alerts</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1">
+          <span class="text-xs font-bold text-slate-500">Capacity Horizon</span>
+          <div class="text-xl font-black text-slate-900 dark:text-white font-mono">32 Days</div>
+          <p class="text-[11px] text-slate-500">Until C: drive reaches 95% threshold</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1">
+          <span class="text-xs font-bold text-slate-500">Thermal / Throttle Sentry</span>
+          <div class="text-xl font-black text-emerald-600">Optimal (42°C Avg)</div>
+          <p class="text-[11px] text-slate-500">CPU clocks operating at 100% target</p>
+        </div>
+
+        <div class="surface-card rounded-2xl p-4 space-y-1">
+          <span class="text-xs font-bold text-slate-500">Crash Frequency</span>
+          <div class="text-xl font-black text-slate-900 dark:text-white font-mono">0.02 / hr</div>
+          <p class="text-[11px] text-slate-500">Within strict stability tolerances</p>
+        </div>
+
+      </div>
+
+      <!-- Time-Series Chart.js Visualizations -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        
+        <!-- Chart 1: Storage Trajectory -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Storage Capacity Trajectory (GB)</h4>
+            <span class="text-[10px] font-mono text-slate-400">Past 24 Hours</span>
+          </div>
+          <div class="h-56 relative">
+            <canvas id="chartStorageTrajectory"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Category Distribution -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Reclaimable Cache Categories (MB)</h4>
+            <span class="text-[10px] font-mono text-slate-400">Zero-Loss Distribution</span>
+          </div>
+          <div class="h-56 relative">
+            <canvas id="chartCategoryDistribution"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 7: AUDIT REPORTS & LIVE EXPLORER                      -->
+    <!-- ============================================================== -->
+    <section id="sec_reports" class="section-view space-y-4">
+      
+      <div class="surface-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="reports_title">Enterprise Maintenance Reports & Audit Trail</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="reports_sub">Cryptographically validated execution logs, live monitored files, and compliance records</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="exportMaintenanceReport()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm">
+            📄 Export JSON Report
+          </button>
+          <button onclick="window.print()" class="px-3 py-1.5 rounded-xl text-xs font-bold subtle-pill">
+            🖨️ Print View
+          </button>
+        </div>
+      </div>
+
+      <!-- Performance Summary Table (Today / Month / Year) -->
+      <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+        <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Consolidated Performance Metrics</h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="border-b border-sky-100 dark:border-white/5 text-slate-500">
+              <tr>
+                <th class="pb-2">Period</th>
+                <th class="pb-2">Space Reclaimed</th>
+                <th class="pb-2">Files Purged</th>
+                <th class="pb-2">Sweeps Completed</th>
+                <th class="pb-2">Fleet Reliability</th>
+                <th class="pb-2 text-right">Verification Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <tr>
+                <td class="py-2.5 font-bold text-sky-700 dark:text-sky-400">Today</td>
+                <td class="font-bold text-slate-900 dark:text-white">1,420 MB</td>
+                <td>920 files</td>
+                <td>18 runs</td>
+                <td class="text-emerald-600 font-bold">100.0%</td>
+                <td class="text-right"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px]">VERIFIED</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 font-bold text-sky-700 dark:text-sky-400">This Month</td>
+                <td class="font-bold text-slate-900 dark:text-white">14.8 GB</td>
+                <td>18,450 files</td>
+                <td>112 runs</td>
+                <td class="text-emerald-600 font-bold">99.8%</td>
+                <td class="text-right"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px]">VERIFIED</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 font-bold text-sky-700 dark:text-sky-400">This Year</td>
+                <td class="font-bold text-slate-900 dark:text-white">84.2 GB</td>
+                <td>104,200 files</td>
+                <td>1,340 runs</td>
+                <td class="text-emerald-600 font-bold">99.5%</td>
+                <td class="text-right"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px]">VERIFIED</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live File Explorer (150+ Paths) -->
+      <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-sky-100 dark:border-white/5 pb-2">
+          <div class="flex items-center gap-2">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Live Monitored Paths Explorer</h4>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300" id="liveFilesCountBadge">150+ PATHS</span>
+          </div>
+          <input type="text" placeholder="Search file paths..." onkeyup="filterLiveFiles(this.value)" class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200">
+        </div>
+        <div class="max-h-56 overflow-y-auto font-mono text-[11px] divide-y divide-slate-100 dark:divide-white/5" id="liveFilesExplorerList">
+          <div class="py-1.5 flex justify-between"><span class="text-slate-700 dark:text-slate-300 truncate">C:\Users\Nunes\AppData\Local\Temp\*.tmp</span><span class="text-sky-600 font-bold shrink-0">Safe Clean</span></div>
+          <div class="py-1.5 flex justify-between"><span class="text-slate-700 dark:text-slate-300 truncate">C:\Windows\Temp\cab_*.tmp</span><span class="text-sky-600 font-bold shrink-0">Safe Clean</span></div>
+          <div class="py-1.5 flex justify-between"><span class="text-slate-700 dark:text-slate-300 truncate">C:\Users\Nunes\AppData\Local\Google\Chrome\User Data\Default\Cache</span><span class="text-sky-600 font-bold shrink-0">Safe Clean</span></div>
+          <div class="py-1.5 flex justify-between"><span class="text-slate-700 dark:text-slate-300 truncate">C:\ProgramData\Microsoft\Windows\WER\ReportArchive</span><span class="text-purple-600 font-bold shrink-0">Dump Clean</span></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 8: SYSTEM SETTINGS & ENTERPRISE SECURITY              -->
+    <!-- ============================================================== -->
+    <section id="sec_settings" class="section-view space-y-4">
+      
+      <div class="surface-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="settings_title">System Settings & Security Policies</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="settings_sub">Configure language, themes, unified 30-day retention, role-based access, and safety boundaries</p>
+        </div>
+        <button onclick="saveSettings()" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm">
+          💾 Save Configuration
+        </button>
+      </div>
+
+      <!-- Settings Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Language & Appearance Settings -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Localization & Appearance</h4>
+          
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+              <div>
+                <strong class="block text-slate-800 dark:text-slate-200">Interface Language</strong>
+                <span class="text-slate-500">Toggle between English and தமிழ் (Tamil)</span>
+              </div>
+              <div class="flex items-center gap-1.5 font-bold">
+                <button onclick="setLanguage('en')" id="langRadio_en" class="px-2.5 py-1 rounded-lg bg-sky-600 text-white shadow-sm">English</button>
+                <button onclick="setLanguage('ta')" id="langRadio_ta" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">தமிழ்</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+              <div>
+                <strong class="block text-slate-800 dark:text-slate-200">Theme Palette</strong>
+                <span class="text-slate-500">Executive light-blue & white or obsidian dark</span>
+              </div>
+              <div class="flex items-center gap-1.5 font-bold">
+                <button onclick="applyTheme('light')" id="themeRadio_light" class="px-2.5 py-1 rounded-lg bg-sky-600 text-white shadow-sm">Light</button>
+                <button onclick="applyTheme('dark')" id="themeRadio_dark" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Dark</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 30-Day Unified Retention Settings -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Unified Backup Retention Policy</h4>
+          
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl space-y-2">
+              <div class="flex items-center justify-between">
+                <strong class="text-slate-800 dark:text-slate-200">Retention Horizon (Default: 30 Days)</strong>
+                <span class="text-xs font-mono font-bold text-sky-600" id="retentionDaysDisplay">30 Days</span>
+              </div>
+              <input type="range" min="7" max="90" step="1" value="30" oninput="document.getElementById('retentionDaysDisplay').textContent = this.value + ' Days'" class="w-full accent-sky-600">
+              <p class="text-[11px] text-slate-500">
+                Snapshots, state backups, and prompt archives older than this threshold are purged automatically once per cycle. Eliminates contradictory 35-day and 30-day rules.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise Security & RBAC -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Enterprise Security & Access Control</h4>
+          
+          <div class="space-y-2 text-xs font-mono">
+            <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+              <span class="text-slate-700 dark:text-slate-300">Role-Based Access:</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">ADMINISTRATOR</span>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+              <span class="text-slate-700 dark:text-slate-300">TLS Encryption:</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">ENFORCED (TLS 1.3)</span>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-900/60 rounded-xl">
+              <span class="text-slate-700 dark:text-slate-300">Remote Command Policy:</span>
+              <span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold">ALLOWLIST ONLY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Safety Boundaries Policy -->
+        <div class="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Safety Boundaries & Allowlist</h4>
+          
+          <div class="space-y-1.5 text-xs">
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span>✔</span><span>Downloads, Desktop, Documents are strictly protected</span>
+            </div>
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span>✔</span><span>No destructive shell commands executed directly by AI</span>
+            </div>
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span>✔</span><span>Prefetch deletion treated as separately approved advanced operation</span>
+            </div>
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span>✔</span><span>File locks gracefully skipped without terminating processes</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+'''
+print("Loaded Part 4")

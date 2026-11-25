@@ -1,0 +1,15 @@
+{
+  "Version": "8.5.0",
+  "RequestId": "req_1794388761_DESKTOP-EV2F0TV",
+  "Command": "UPDATE",
+  "PC": "DESKTOP-EV2F0TV",
+  "Options": {
+    "preset": "balanced",
+    "cleanmgr": true,
+    "recycle_bin": false,
+    "dry_run": false
+  },
+  "CreatedUtc": "2026-11-11T09:19:21.083519+00:00",
+  "ExpiresUtc": "2026-11-11T13:19:21.083496+00:00",
+  "Source": "NUNES_DASHBOARD_1CLICK"
+}

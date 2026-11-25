@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Outer Glow -->
+    <filter id="outerGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#0284c7" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#38bdf8" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Core Lightning Bolt Glow -->
+    <filter id="coreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38bdf8" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="12" flood-color="#0284c7" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Deep Tech Squircle Gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="40%" stop-color="#0b132b"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <!-- Border Ring Gradient -->
+    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="30%" stop-color="#0ea5e9"/>
+      <stop offset="70%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <!-- High-Voltage Monogram Gradient -->
+    <linearGradient id="boltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#e0f2fe"/>
+      <stop offset="60%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Accent Energy Arc -->
+    <linearGradient id="energyGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="50%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+
+    <!-- Specular Highlight Glass -->
+    <linearGradient id="glassGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow Layer -->
+  <rect x="36" y="36" width="440" height="440" rx="112" fill="url(#bgGradient)" filter="url(#outerGlow)"/>
+
+  <!-- Main Squircle Body -->
+  <rect x="36" y="36" width="440" height="440" rx="112" fill="url(#bgGradient)"/>
+  
+  <!-- Sleek Cybernetic Border Ring (2.5D Rim) -->
+  <rect x="38" y="38" width="436" height="436" rx="110" fill="none" stroke="url(#borderGradient)" stroke-width="12" stroke-opacity="0.95"/>
+
+  <!-- Top Glass Sheen -->
+  <path d="M 40 148 C 40 88, 88 40, 148 40 L 364 40 C 424 40, 472 88, 472 148 C 472 210, 360 260, 256 260 C 150 260, 40 210, 40 148 Z" fill="url(#glassGloss)"/>
+
+  <!-- Quantum Mesh Radar Circles (Subtle Background Geometry) -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="8 12" stroke-opacity="0.35"/>
+  <circle cx="256" cy="256" r="115" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 8" stroke-opacity="0.25"/>
+
+  <!-- Central Emblem: Precision Stylized "N" with Integrated Lightning Volt Blade -->
+  <g filter="url(#coreGlow)">
+    <!-- Left Vertical Pillar of N -->
+    <path d="M 124 138 C 124 122, 137 110, 153 110 L 175 110 C 191 110, 204 122, 204 138 L 204 374 C 204 390, 191 402, 175 402 L 153 402 C 137 402, 124 390, 124 374 Z" fill="url(#boltGradient)"/>
+
+    <!-- Right Vertical Pillar of N -->
+    <path d="M 308 138 C 308 122, 321 110, 337 110 L 359 110 C 375 110, 388 122, 388 138 L 388 374 C 388 390, 375 402, 359 402 L 337 402 C 321 402, 308 390, 308 374 Z" fill="url(#boltGradient)"/>
+
+    <!-- Dynamic Diagonal Lightning Slash (N Core) -->
+    <path d="M 188 116 L 332 322 L 298 322 L 324 396 L 180 190 L 214 190 Z" fill="url(#boltGradient)"/>
+  </g>
+
+  <!-- High-Energy Nexus Sparkle at Lightning Strike -->
+  <circle cx="316" cy="356" r="12" fill="#ffffff" filter="url(#coreGlow)"/>
+  <circle cx="316" cy="356" r="6" fill="#38bdf8"/>
+  
+  <!-- Autonomous Pulse Orbit Dot (Top-Right Live Status Indicator) -->
+  <circle cx="410" cy="102" r="22" fill="#10b981" filter="url(#coreGlow)"/>
+  <circle cx="410" cy="102" r="14" fill="#a7f3d0"/>
+  <circle cx="410" cy="102" r="8" fill="#ffffff"/>
+</svg>

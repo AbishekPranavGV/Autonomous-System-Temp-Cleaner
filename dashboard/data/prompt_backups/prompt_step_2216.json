@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_2216",
+  "step_index": 2216,
+  "created_at_utc": "2026-11-04T10:57:21+00:00",
+  "created_timestamp": 1793789841.0,
+  "expires_at_utc": "2026-12-09T10:57:21+00:00",
+  "expires_timestamp": 1796813841.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\n@[https://spots-completion-avatar-geometry.trycloudflare.com/] \"still not showing anything in here\" \n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-04T16:27:21+05:30.\n\nThe user has mentioned some items in the form @[ITEM]. Here is extra information about the items that were mentioned by the user, in the order that they appear:\n\n@[https://spots-completion-avatar-geometry.trycloudflare.com/] is a [Link]:\nURL: https://spots-completion-avatar-geometry.trycloudflare.com/\nTitle: \n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

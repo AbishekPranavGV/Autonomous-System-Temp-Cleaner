@@ -1,0 +1,15 @@
+{
+  "Version": "10.0.0",
+  "RequestId": "req_1794467197_DESKTOP-M378M07",
+  "Command": "CLEAN",
+  "PC": "DESKTOP-M378M07",
+  "Options": {
+    "preset": "balanced",
+    "cleanmgr": true,
+    "recycle_bin": false,
+    "dry_run": false
+  },
+  "CreatedUtc": "2026-11-12T07:06:37.028353+00:00",
+  "ExpiresUtc": "2026-11-12T11:06:37.028329+00:00",
+  "Source": "NUNES_DASHBOARD_1CLICK"
+}

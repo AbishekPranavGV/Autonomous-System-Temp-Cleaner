@@ -1,0 +1,15 @@
+{
+  "id": "prompt_step_1854",
+  "step_index": 1854,
+  "created_at_utc": "2026-11-04T06:32:02+00:00",
+  "created_timestamp": 1793773922.0,
+  "expires_at_utc": "2026-12-09T06:32:02+00:00",
+  "expires_timestamp": 1796797922.0,
+  "retention_days": 35,
+  "prompt": "<USER_REQUEST>\nadd dashboard as button and show the live conneccted files\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-11-04T12:02:02+05:30.\n</ADDITIONAL_METADATA>",
+  "metadata": {
+    "source": "conversation_transcript",
+    "media": []
+  },
+  "status": "BACKED_UP"
+}

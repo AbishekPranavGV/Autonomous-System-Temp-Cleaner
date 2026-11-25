@@ -1,0 +1,61 @@
+{
+  "Computer": "DESKTOP-EV2F0TV",
+  "computer": "DESKTOP-EV2F0TV",
+  "OS": "Windows 11",
+  "User": "Nunes-Remote",
+  "LastSeenUtc": "2026-11-05T12:19:10.057826+00:00",
+  "last_seen_utc": "2026-11-05T12:19:10.057826+00:00",
+  "TailscaleIP": "100.77.65.18",
+  "tailscale_ip": "100.77.65.18",
+  "LocalIPv4": "192.168.1.115",
+  "local_ip": "192.168.1.115",
+  "FreeSpaceGB": 28.5,
+  "disk_free_gb": 28.5,
+  "DiskTotalGB": 250.0,
+  "disk_total_gb": 250.0,
+  "DiskUsedGB": 221.5,
+  "disk_used_gb": 221.5,
+  "DiskPercentUsed": 88.6,
+  "disk_percent_used": 88.6,
+  "Online": true,
+  "online": true,
+  "Status": "ONLINE",
+  "status": "ONLINE",
+  "State": "READY",
+  "worker_state": "READY",
+  "Message": "Live Connected \u2022 Safe Blue Zone (<90% used) \u2022 Auto clean 4H active",
+  "auto_clean_enabled": true,
+  "last_clean_status": "SUCCESS",
+  "last_clean_utc": "2026-11-05T12:19:10.057826+00:00",
+  "latest_result": {
+    "deleted": 3420,
+    "skipped": 5,
+    "recovered_mb": 24650.0,
+    "free_space_gb": 28.5,
+    "timestamp": "2026-11-05T12:19:10.057826+00:00",
+    "status": "SUCCESS",
+    "folders": [
+      {
+        "Folder": "User Temp (%TEMP%)",
+        "Deleted": 2840,
+        "Skipped": 4,
+        "EstimatedMB": 8500.0,
+        "Status": "SUCCESS"
+      },
+      {
+        "Folder": "C:/Windows/Temp",
+        "Deleted": 579,
+        "Skipped": 1,
+        "EstimatedMB": 3150.0,
+        "Status": "SUCCESS"
+      },
+      {
+        "Folder": "Windows Disk Cleanup (cleanmgr.exe)",
+        "Deleted": 1,
+        "Skipped": 0,
+        "EstimatedMB": 13000.0,
+        "Status": "SUCCESS"
+      }
+    ]
+  }
+}
